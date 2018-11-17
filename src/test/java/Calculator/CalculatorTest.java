@@ -1,4 +1,5 @@
 package Calculator;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,28 +19,28 @@ public class CalculatorTest {
     }*/
 
     @Test
-    void testAdd(){
+    void testAdd() {
         Calculator calculator = new Calculator();
         int result = calculator.add(2, 5);
         assertEquals(7, result);
     }
 
     @Test
-    void testSubtract(){
+    void testSubtract() {
         Calculator calculator = new Calculator();
         int result = calculator.subtract(2, 5);
         assertEquals(-3, result);
     }
 
     @Test
-    void testMultiply(){
+    void testMultiply() {
         Calculator calculator = new Calculator();
         int result = calculator.multiply(2, 5);
         assertEquals(10, result);
     }
 
     @Test
-    void testDivide(){
+    void testDivide() {
         Calculator calculator = new Calculator();
         double result = calculator.divide(2, 5);
         assertEquals(0.4, result);
