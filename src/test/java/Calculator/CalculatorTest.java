@@ -3,6 +3,11 @@ package Calculator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -44,5 +49,27 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         double result = calculator.divide(2, 5);
         assertEquals(0.4, result);
+    }
+
+    @ParameterizedTest
+    @MethodSource("addNumberProvider")
+    void testParameterized(int first, int second, int result) {
+        Calculator calculator = new Calculator();
+        int addResult = calculator.add(first, second);
+        assertEquals(addResult, result);
+    }
+
+    static Stream<Arguments> addNumberProvider() {
+        return Stream.of(
+                Arguments.arguments(1, 2, 3),
+                Arguments.arguments(2, 2, 4),
+                Arguments.arguments(5, 5, 10),
+                Arguments.arguments(5, 10, 15),
+                Arguments.arguments(5, -5, 0),
+                Arguments.arguments(0, 0, 0),
+                Arguments.arguments(-1, -5, -6),
+                Arguments.arguments(-2, -5, -7),
+                Arguments.arguments(999, -9, 990)
+        );
     }
 }
