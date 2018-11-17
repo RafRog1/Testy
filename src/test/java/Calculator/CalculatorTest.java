@@ -52,14 +52,22 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("addNumberProvider")
-    void testParameterized(int first, int second, int result) {
+    @MethodSource("addNumberProviderAdd")
+    void testParameterizedAdd(int first, int second, int result) {
         Calculator calculator = new Calculator();
         int addResult = calculator.add(first, second);
         assertEquals(addResult, result);
     }
 
-    static Stream<Arguments> addNumberProvider() {
+    @ParameterizedTest
+    @MethodSource("addNumberProviderSubtract")
+    void testParameterizedSubtract(int first, int second, int result) {
+        Calculator calculator = new Calculator();
+        int addResult = calculator.subtract(first, second);
+        assertEquals(addResult, result);
+    }
+
+    static Stream<Arguments> addNumberProviderAdd() {
         return Stream.of(
                 Arguments.arguments(1, 2, 3),
                 Arguments.arguments(2, 2, 4),
@@ -70,6 +78,20 @@ public class CalculatorTest {
                 Arguments.arguments(-1, -5, -6),
                 Arguments.arguments(-2, -5, -7),
                 Arguments.arguments(999, -9, 990)
+        );
+    }
+
+    static Stream<Arguments> addNumberProviderSubtract() {
+        return Stream.of(
+                Arguments.arguments(1, 2, -1),
+                Arguments.arguments(2, 2, 0),
+                Arguments.arguments(5, 5, 0),
+                Arguments.arguments(5, 10, -5),
+                Arguments.arguments(5, -5, 10),
+                Arguments.arguments(0, 0, 0),
+                Arguments.arguments(-1, -5, 4),
+                Arguments.arguments(-2, -5, 3),
+                Arguments.arguments(999, -9, 1008)
         );
     }
 }
