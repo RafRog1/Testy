@@ -1,11 +1,13 @@
 package Calculator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -66,6 +68,48 @@ public class CalculatorTest {
         int addResult = calculator.subtract(first, second);
         assertEquals(addResult, result);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 5})
+    void testValueSourceAdd(int number) {
+        Calculator calculator = new Calculator();
+        int addResult = calculator.add(number, number);
+        assertEquals(number * 2, addResult);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 5, 0, 7, 0})
+    void testValueSourceDivide(int number) {
+        Calculator calculator = new Calculator();
+        if(number != 0) {
+            double addResult = calculator.divide(number, number);
+            assertEquals(1, addResult);
+        } else {
+            testShouldThrowDivideByZeroException(number);
+        }
+    }
+
+    @Test
+    static void testShouldThrowDivideByZeroException(int number) {
+        Calculator calculator = new Calculator();
+        //calculator.divide(9, 0);
+        Assertions.assertThrows(DivideByZeroDenominator.class, () -> calculator.divide(number, number));
+    }
+
+    @Test
+    void testShouldThrowDivideByZeroException() {
+        Calculator calculator = new Calculator();
+        //calculator.divide(9, 0);
+        Assertions.assertThrows(DivideByZeroDenominator.class, () -> calculator.divide(9, 0));
+    }
+
+    @Test
+    void testDoesNotThrowDivideByZeroException() {
+        Calculator calculator = new Calculator();
+        //calculator.divide(9, 0);
+        Assertions.assertDoesNotThrow(() -> calculator.divide(9, 1));
+    }
+
 
     static Stream<Arguments> addNumberProviderAdd() {
         return Stream.of(

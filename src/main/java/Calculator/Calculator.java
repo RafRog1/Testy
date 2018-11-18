@@ -15,6 +15,9 @@ public class Calculator {
     }
 
     double divide(int a, int b) {
+        if (b == 0){
+            throw new DivideByZeroDenominator();
+        }
         return (double) a / b;
     }
 }
