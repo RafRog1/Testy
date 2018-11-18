@@ -90,7 +90,7 @@ public class CalculatorTest {
     }
 
     @Test
-    static void testShouldThrowDivideByZeroException(int number) {
+    private static void testShouldThrowDivideByZeroException(int number) {
         Calculator calculator = new Calculator();
         //calculator.divide(9, 0);
         Assertions.assertThrows(DivideByZeroDenominator.class, () -> calculator.divide(number, number));
@@ -111,7 +111,7 @@ public class CalculatorTest {
     }
 
 
-    static Stream<Arguments> addNumberProviderAdd() {
+    private static Stream<Arguments> addNumberProviderAdd() {
         return Stream.of(
                 Arguments.arguments(1, 2, 3),
                 Arguments.arguments(2, 2, 4),
@@ -125,7 +125,7 @@ public class CalculatorTest {
         );
     }
 
-    static Stream<Arguments> addNumberProviderSubtract() {
+    private static Stream<Arguments> addNumberProviderSubtract() {
         return Stream.of(
                 Arguments.arguments(1, 2, -1),
                 Arguments.arguments(2, 2, 0),
